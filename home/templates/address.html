@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Address{% endblock title %}
+{% block main-content %}
+
+<div class="container my-5">
+    <div class="row">
+        <h2>Welcome <span class="text-capitalize">{{request.user}}</span></h2>
+    
+    <div class="col-sm-2 boder-end">
+        <ul class="list-unstyled">
+            <li class="d-grid"><a href="{% url "profile" %}" class="btn">Profile</a><li>
+            <li class="d-grid"><a href="{% url "address" %}" class="btn btn-primary">Address</a></li>
+            <li class="d-grid"><a href="{% url "showapjobs" %}" class="btn">Applied jobs</a></li>
+            <li class="d-grid"><a href="{% url "myjobs" %}" class="btn">My Jobs</a></li>
+            <li class="d-grid"><a href="{% url "manage-jobs" %}" class="btn">Manage Jobs</a></li>
+        </ul>
+    </div>
+    
+    <div class="col-sm-8 offset-sm-1">
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="alert alert-{{msg.tags}}" role="alert">
+                {{msg}}
+            </div>
+            {% endfor %}
+        {% endif %}
+        <div class="row">
+
+            {% for ad in addr %}
+
+            <div class="col-sm-6">
+                <div class="card m-2">
+                    <div class="card-body">
+                        <h3>Details {{forloop.counter}}</h3>{{ad.id}}
+                        <p>Name: {{ad.first_name }} {{ad.last_name}}</p>
+                        <p>Locality: {{ad.location}}</p>
+                        <p>Mobile: {{ad.mobile}}</p>
+                        <p>Job title: {{ad.job_title}}</p>
+                        <p>District: {{ad.district}}</p>
+                        <p>Aadhar Number: {{ad.aadhar}}</p>
+                        <p class="text-center"><a href="{% url 'updateAddress' pk=ad.id %}" type="button" class="btn btn-success">Update</a></p>
+                        
+
+                    </div>
+                </div>
+            </div>
+
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+</div>
+
+
+{% endblock main-content %}

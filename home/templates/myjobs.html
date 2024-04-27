@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Address{% endblock title %}
+{% block main-content %}
+
+<style>
+    h3 {
+      text-align: center;
+    }
+</style>
+
+<div class="container my-5">
+    <div class="row">
+        <h2>Welcome <span class="text-capitalize">{{request.user}}</span></h2>
+    
+    <div class="col-sm-2 boder-end">
+        <ul class="list-unstyled">
+            <li class="d-grid"><a href="{% url "profile" %}" class="btn">Profile</a><li>
+            <li class="d-grid"><a href="{% url "address" %}" class="btn">Address</a></li>
+            <li class="d-grid"><a href="{% url "showapjobs" %}" class="btn">Applied jobs</a></li>
+            <li class="d-grid"><a href="{% url "myjobs" %}" class="btn btn-primary">My Jobs</a></li>
+            <li class="d-grid"><a href="{% url "manage-jobs" %}" class="btn">Manage Jobs</a></li>
+        </ul>
+    </div>
+    
+    <div class="col-sm-8 offset-sm-1">
+        <div class="row">
+            <div><h3>Jobs created by {{request.user.employe}}</h3></div><br>
+            {% for ad in myjob %}
+
+            <div class="col-sm-6">
+               
+                <div class="card m-2">
+                    <div class="card-body">
+                        <h3>Details-Job No {{forloop.counter}}</h3>
+                        <p>Job title: {{ad.title}}</p>
+                        <p>Salary: {{ad.salary}}</p>
+                        <p>Category: {{ad.category}}</p>
+                        <p class="text-center"><a href="{% url "updateJobs" pk=ad.id %}" type="button" class="btn btn-success">Update</a></p>
+                        
+
+                    </div>
+                </div>
+            </div>
+
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+</div>
+
+
+{% endblock main-content %}

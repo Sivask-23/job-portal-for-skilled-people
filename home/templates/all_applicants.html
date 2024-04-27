@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Address{% endblock title %}
+{% block main-content %}
+
+<div class="container my-5">
+    <div class="row">
+        <h2>Welcome <span class="text-capitalize">{{request.user}}</span></h2>
+    
+    <div class="col-sm-2 boder-end">
+        <ul class="list-unstyled">
+            <li class="d-grid"><a href="{% url "profile" %}" class="btn">Profile</a><li>
+            <li class="d-grid"><a href="{% url "address" %}" class="btn">Address</a></li>
+            <li class="d-grid"><a href="{% url "showapjobs" %}" class="btn">Applied jobs</a></li>
+            <li class="d-grid"><a href="{% url "manage-jobs" %}" class="btn btn-primary">My Jobs</a></li>
+        </ul>
+    </div>
+    
+    <div class="col-sm-8 offset-sm-1">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="card mx-auto" style="width: 65rem;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">All Applicants for {{job.title}} Position</h5>
+                        <table class ="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Full name</th>
+                                    <th scope="col">locality</th>
+                                    <th scope="col">district</th>
+                                    <th scope="col">Aadhar</th>
+                                    <th scope="col">Mobile</th>
+                                    <th scope="col">Aplication date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for app in applicants %}
+                                <tr>
+                                    <td>{{app.user.employe}}</td>
+                                    <td>{{app.user.employe.location}}</td>
+                                    <td>{{app.user.employe.district}}</td>
+                                    <td>{{app.user.employe.aadhar}}</td>
+                                    <td>{{app.user.employe.mobile}}</td>
+                                    <td>{{app.timestamp}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+
+                    </div>
+                </div>
+            </div>
+
+
+           
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+</div>
+
+
+{% endblock main-content %}

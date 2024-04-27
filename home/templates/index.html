@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Homepage{% endblock title %}
+
+
+
+{% block banner-slider %}
+
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'images/banner1.jpg'%}" class="d-block w-100" alt="banner.jpg">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/banner2.jpg'%}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src=".{% static 'images/banner3.jpg'%}" class="d-block w-100" alt="...">
+      </div>
+    </div>
+</div>
+
+
+{% endblock banner-slider %}
+
+
+{% block information %}
+
+<div class="container">
+    <div class="row bg-success text-center p-5 text-white border-bottom shadow">
+        <small class="fs-8">
+            Since its inception, one of the major pillars of Skill India Mission is Sector Skill Councils (SSCs), which play a vital role in bridging the gap between what the industry demands and what the skilling requirements should be
+            The National Occupational Standard is one of the most significant contributions of Skill India Mission to accelerate India's skilling ecosystem, made possible by the SSCs, which are national partnership organizations bringing together all the stakeholders-
+            industry, labour and the academia. The SSCs operate as an autonomous body and could be registered as a Section 8 Company, or a Society.
+        </small>
+    </div>
+</div>
+
+{% endblock information %}
+
+{% block main-content %}
+
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 17vh;
+        object-fit: cover;
+        }
+
+
+</style>
+
+
+
+
+
+<br>
+<div class="container">
+    <h2 class="text-center">Trending Jobs</h2>
+</div>
+<br><br>
+
+{% if user.is_authenticated %}
+
+<div class="container">
+  <div class="row">
+    {% for i in dict_jobs %}
+    <div class="col-md-4 col-sm-4">
+        <div class="card text-dark bg-light" style="width: 18rem;">
+            <img src="{{i.cjob_img.url}}" class="card-img-top" alt="ok">
+            <div class="card-body">
+              <h5 class="card-title">{{i.title}}</h5>
+              <p class="card-text">{{i.salary}}</p>
+              <a href="{% url "job-details" i.pk %}" class="btn btn-primary">Know more</a>
+            </div>
+        </div><br><br>
+    </div>
+    {% endfor %}
+ </div>
+
+{% else %}
+
+<div class="container">
+  <div class="row">
+    {% for i in dict_jobs %}
+    <div class="col-md-4 col-sm-4">
+        <div class="card text-dark bg-light" style="width: 18rem;">
+            <img src="{{i.cjob_img.url}}" class="card-img-top" alt="ok">
+            <div class="card-body">
+              <h5 class="card-title">{{i.title}}</h5>
+              <p class="card-text">{{i.salary}}</p>
+              <a href="{% url 'login' %}" class="btn btn-primary">Know more</a>
+            </div>
+        </div><br><br>
+    </div>
+    {% endfor %}
+ </div>
+
+
+
+ {% endif %}
+
+<br><br>
+ <div class="row">
+    <div class="col-md-4 col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <img src="{% static 'images/card.avif'%}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <img src="{% static 'images/card.avif'%}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <img src="{% static 'images/ibm.svg'%}" class="card-img-top embed-responsive-item" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+</div>
+
+
+<div></div>
+
+<br>
+<br>
+<br>
+
+{% endblock main-content %}

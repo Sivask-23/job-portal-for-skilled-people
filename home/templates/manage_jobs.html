@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Address{% endblock title %}
+{% block main-content %}
+
+<div class="container my-5">
+    <div class="row">
+        <h2>Welcome <span class="text-capitalize">{{request.user}}</span></h2>
+    
+    <div class="col-sm-2 boder-end">
+        <ul class="list-unstyled">
+            <li class="d-grid"><a href="{% url "profile" %}" class="btn">Profile</a><li>
+            <li class="d-grid"><a href="{% url "address" %}" class="btn">Address</a></li>
+            <li class="d-grid"><a href="{% url "showapjobs" %}" class="btn">Applied jobs</a></li>
+            <li class="d-grid"><a href="{% url "myjobs" %}" class="btn">My Jobs</a></li>
+            <li class="d-grid"><a href="{% url "manage-jobs" %}" class="btn btn-primary">Manage Jobs</a></li>
+        </ul>
+    </div>
+    
+    <div class="col-sm-8 offset-sm-1">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="card mx-auto" style="width: 60rem;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Manage jobs</h5>
+                        <table class ="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Job title</th>
+                                    <th scope="col">Salary</th>
+                                    <th scope="col">Category</th>
+                    
+                                    <th scope="col">No of Applicants</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ad in cjob %}
+                                <tr>
+                                    <td>{{ad.title}}</td>
+                                    <td>{{ad.salary}}</td>
+                                    <td>{{ad.category}}</td>
+                                    <td>{{ad.applyjob_set.all.count}} <a href="{% url "all-applicants" ad.pk %}"><small>View all</small></a></td>
+                                    <td><a href="#">update job<a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+
+                    </div>
+                </div>
+            </div>
+            {% if messages %}
+            {% for msg in messages %}
+            <div class="alert alert-{{msg.tags}}" role="alert">
+                {{msg}}
+            </div>
+            {% endfor %}
+        {% endif %}
+
+
+           
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+</div>
+
+
+{% endblock main-content %}

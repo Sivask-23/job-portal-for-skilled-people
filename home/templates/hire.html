@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Hire{% endblock title %}
+{% block main-content %}
+
+
+<style>
+    h2 {
+      text-align: center;
+      color: blue;
+    }
+</style>
+
+
+
+<div class="container my-5">
+    <div class="row">
+        <h2>Welcome <span class="text-capitalize">{{request.user.employe}} you can hire workers from here</span></h2>
+    
+    <div class="col-sm-2 boder-end">
+        <ul class="list-unstyled">
+            <form class="d-grid" role="search">
+                <input class="form-control me-2" name='q' type="search" placeholder="Enter location" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+            
+        </ul>
+    </div>
+    <br>
+    <div class="col-sm-8 offset-sm-1"><br>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="card mx-auto" style="width: 65rem;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">All Applicants in search location "{{q}}" </h5>
+                        <table class ="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Full name</th>
+                                    <th scope="col">locality</th>
+                                    <th scope="col">district</th>
+                                    <th scope="col">Aadhar</th>
+                                    <th scope="col">Mobile</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for app in data %}
+                                <tr>
+                                    <td>{{app.first_name}} {{app.last_name}}</td>
+                                    <td>{{app.location}}</td>
+                                    <td>{{app.district}}</td>
+                                    <td>{{app.aadhar}}</td>
+                                    <td>{{app.mobile}}</td>
+                                    <td><a href="#">Download Resume<a></td>
+                                    
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                        
+
+                    </div>
+                </div>
+            </div>
+
+
+           
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+</div>
+
+
+{% endblock main-content %}
