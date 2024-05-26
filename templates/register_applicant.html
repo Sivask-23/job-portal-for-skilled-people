@@ -1,0 +1,50 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Register applicant{% endblock title %}
+{% block main-content %}
+<br><br><br><br>
+
+<form class="p-4 p-md border rounded-3 bg-light" method="POST">
+    {% csrf_token %}
+    <div class="form-floating mb-3">
+        {% render_field form.email class="form-control" %}
+        <label for="floatingInput">Email address</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        {% render_field form.password1 class="form-control" %}
+        <label for="floatingInput">Enter Password</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        {% render_field form.password2 class="form-control" %}
+        <label for="floatingInput">Confrim Password</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
+    <hr class="my-4">
+    <small class="text-muted">Already have an account ? <a href="{% url 'login' %}">Sign In </a></small>
+
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+        <p class="alert alert-danger my-3">{{error}}</p>
+    {% endfor %}
+    {% endif %}
+
+
+{% if messages %}
+    {% for msg in messages %}
+    <div class="alert alert-{{msg.tags}}" role="alert">
+        {{msg}}
+    </div>
+    {% endfor %}
+{% endif %}
+
+
+
+</form>
+
+
+{% endblock main-content %}
